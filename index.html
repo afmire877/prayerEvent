@@ -5,11 +5,45 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="styles.css">
 </head>
-<body>
-	<button onclick="getLocation()"><i class="fas fa-search-location"></i></button>
+<body >
+	<button onclick="constructUrl()"><i class="fas fa-search-location"></i></button>
 
 	<p id="demo"></p>
+	<table>
+		<thead>
+			<tr>
+				<td>Salah</td>
+				<td>Time</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Fajr</td>
+				<td class="fajr-time"></td>
+			</tr>
+			<tr>
+				<td>Duhr</td>
+				<td class="duhr-time"></td>
+			</tr>
+			<tr>
+				<td>Asr</td>
+				<td class="asr-time"></td>
+			</tr>
+			<tr>
+				<td>Magrib</td>
+				<td class="magrib-time"></td>
+			</tr>
+			<tr>
+				<td>Isha</td>
+				<td class="isha-time"></td>
+			</tr>
+		</tbody>
+	</table>
 
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 	<script src="app.js"></script>
 </body>
 </html>
