@@ -1,14 +1,40 @@
 let lat, long;
-let constructed = false;
+const longitude = document.querySelector('#longitude'); 
+const latitude = document.querySelector('#latitude'); 
+const locationDisplay = document.querySelector('.locationDisplay'); 
+const loc = document.querySelector('#loc');
+
+const Fajr = document.querySelector('.fajr-time');
+const Dhuhr = document.querySelector('.duhr-time');
+const Asr = document.querySelector('.asr-time');
+const Maghrib = document.querySelector('.magrib-time');
+const Isha = document.querySelector('.isha-time');
+
+
+
+
 const d = new Date();
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
+    if(typeof lat === 'number') {
+    	console.log(lat, long)
+	    longitude.innerHTML = `${long}`;
+	    latitude.innerHTML = `${lat}`;
+	    locationDisplay.style.display = 'block'
+
+	    let url = `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${long}&method=2&month=${d.getMonth() + 1}&year=${d.getFullYear()}`;
+	    console.log(url)
+	    loadData(url);
+    }
+
   } else { 
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
+
 }
+
 function showPosition(position) {
   lat = position.coords.latitude;
   long = position.coords.longitude;
@@ -16,30 +42,35 @@ function showPosition(position) {
 
 
 
-function constructUrl(){
-	getLocation();
-	let url = `http://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${long}&method=2&month=${d.getMonth()}&year=${d.getFullYear()}`;
-	console.log(url)
-	constructed = true;
-	
-}
+
+function loadData(url){
 
 
-function loadData(){
-	if( constructed == true){
-		var XHR = new XMLHttpRequest();
-
-		XHR.onreadystatechange = function(){
-			if(this.readyState == 4 && this.status == 200){
-
-				 document.getElementById("demo").innerHTML = XHR.responseText;
-			}
-
-		}
-
-		XHR.open('GET', url, true);
-		XHR.send();
+fetch(url)
+.then((response) => {
+	if(response.ok){
+		return response.json()
 	}
+})
+.then(data => {
+	const index = d.getDate() - 1;
+	let timings = data.data[index].timings
+	for (let salah in timings) {
+		console.log(salah +':' + timings[salah])
+
+
+	}
+	
+	Fajr.innerHTML = timings['Fajr'].split(' ')[0];
+	Dhuhr.innerHTML = timings['Dhuhr'].split(' ')[0];
+	Asr.innerHTML = timings['Asr'].split(' ')[0];
+	Maghrib.innerHTML = timings['Isha'].split(' ')[0];
+	Isha.innerHTML = timings['Isha'].split(' ')[0];
+
+
+
+})
+
 }
 
 
@@ -47,10 +78,9 @@ function loadData(){
 
 
 
-window.addEventListener("load", constructUrl);
-loadData();
-// window.addEventListener("loadData", loadData);
 
+// window.addEventListener("loadData", loadData);
+loc.addEventListener('click', getLocation)
 
 
 

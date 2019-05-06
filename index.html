@@ -6,7 +6,9 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body >
-	<button onclick="constructUrl()"><i class="fas fa-search-location"></i></button>
+	<button  id= "loc"onclick="getLocation()"><i class="fas fa-search-location"></i></button>
+
+	<p class="locationDisplay" style="display: none;">Location -  lat:<span id="latitude"></span>  long:<span id="longitude"></span></p>
 
 	<p id="demo"></p>
 	<table>
