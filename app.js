@@ -1,21 +1,24 @@
 let lat, long;
-const longitude = document.querySelector('#longitude'); 
-const latitude = document.querySelector('#latitude'); 
-const locationDisplay = document.querySelector('.locationDisplay'); 
-const loc = document.querySelector('#loc');
+// const longitude = document.querySelector('#longitude'); 
+// const latitude = document.querySelector('#latitude'); 
+// const locationDisplay = document.querySelector('.locationDisplay'); 
+// const loc = document.querySelector('#loc');
 
-const Fajr = document.querySelector('.fajr-time');
-const Dhuhr = document.querySelector('.duhr-time');
-const Asr = document.querySelector('.asr-time');
-const Maghrib = document.querySelector('.magrib-time');
-const Isha = document.querySelector('.isha-time');
+// const apiKey = 'AIzaSyBQF1bawnacI1cQKf4HVwK-1yqAJ8JTt9U'
+
+// const Fajr = document.querySelector('.fajr-time');
+// const Dhuhr = document.querySelector('.duhr-time');
+// const Asr = document.querySelector('.asr-time');
+// const Maghrib = document.querySelector('.magrib-time');
+// const Isha = document.querySelector('.isha-time');
 
 
 
 
 const d = new Date();
 
-function getLocation() {
+
+export function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
     if(typeof lat === 'number') {
@@ -35,7 +38,7 @@ function getLocation() {
 
 }
 
-function showPosition(position) {
+export function showPosition(position) {
   lat = position.coords.latitude;
   long = position.coords.longitude;
 }
@@ -43,7 +46,7 @@ function showPosition(position) {
 
 
 
-function loadData(url){
+export function loadData(url){
 
 
 fetch(url)
@@ -73,14 +76,6 @@ fetch(url)
 
 }
 
-
-
-
-
-
-
-// window.addEventListener("loadData", loadData);
-loc.addEventListener('click', getLocation)
 
 
 
